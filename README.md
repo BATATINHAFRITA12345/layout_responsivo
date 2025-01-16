@@ -1,1 +1,157 @@
 # layout_responsivo
+import 'package:flutter/material.dart';
+
+void main() {
+  runApp(const MyApp());
+}
+
+class MyApp extends StatelessWidget {
+  const MyApp({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      debugShowCheckedModeBanner: false,
+      title: 'Layout Responsivo',
+      theme: ThemeData(
+        primarySwatch: Colors.blue,
+        fontFamily: 'Roboto',
+      ),
+      home: const ResponsiveLayout(),
+    );
+  }
+}
+
+class ResponsiveLayout extends StatelessWidget {
+  const ResponsiveLayout({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text('Dashboard Responsivo'),
+        centerTitle: true,
+        elevation: 4,
+        backgroundColor: Colors.blue.shade900,
+      ),
+      body: LayoutBuilder(
+        builder: (context, constraints) {
+          if (constraints.maxWidth < 600) {
+            return const SmallScreen();
+          } else if (constraints.maxWidth < 1200) {
+            return const MediumScreen();
+          } else {
+            return const LargeScreen();
+          }
+        },
+      ),
+    );
+  }
+}
+
+// Tela para dispositivos pequenos (smartphones)
+class SmallScreen extends StatelessWidget {
+  const SmallScreen({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      padding: const EdgeInsets.all(16.0),
+      color: Colors.blue.shade50,
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          const Icon(Icons.phone_android, size: 80, color: Colors.blue),
+          const SizedBox(height: 20),
+          Text(
+            'Bem-vindo ao Mobile!',
+            style: TextStyle(
+              fontSize: 24,
+              fontWeight: FontWeight.bold,
+              color: Colors.blue.shade900,
+            ),
+          ),
+          const SizedBox(height: 10),
+          const Text(
+            'Este layout foi projetado para dispositivos móveis.',
+            textAlign: TextAlign.center,
+            style: TextStyle(fontSize: 16),
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+// Tela para dispositivos médios (tablets)
+class MediumScreen extends StatelessWidget {
+  const MediumScreen({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      padding: const EdgeInsets.all(32.0),
+      color: Colors.green.shade50,
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          const Icon(Icons.tablet_mac, size: 100, color: Colors.green),
+          const SizedBox(height: 20),
+          Text(
+            'Bem-vindo ao Tablet!',
+            style: TextStyle(
+              fontSize: 28,
+              fontWeight: FontWeight.bold,
+              color: Colors.green.shade900,
+            ),
+          ),
+          const SizedBox(height: 10),
+          const Text(
+            'Este layout é otimizado para telas de tamanho médio.',
+            textAlign: TextAlign.center,
+            style: TextStyle(fontSize: 18),
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+// Tela para dispositivos grandes (desktops)
+class LargeScreen extends StatelessWidget {
+  const LargeScreen({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      padding: const EdgeInsets.all(40.0),
+      color: Colors.orange.shade50,
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          const Icon(Icons.desktop_mac, size: 120, color: Colors.orange),
+          const SizedBox(width: 40),
+          Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                'Bem-vindo ao Desktop!',
+                style: TextStyle(
+                  fontSize: 32,
+                  fontWeight: FontWeight.bold,
+                  color: Colors.orange.shade900,
+                ),
+              ),
+              const SizedBox(height: 10),
+              const Text(
+                'Este layout foi projetado para grandes telas, como desktops.',
+                style: TextStyle(fontSize: 20),
+              ),
+            ],
+          ),
+        ],
+      ),
+    );
+  }
+}
